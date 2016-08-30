@@ -1,0 +1,13 @@
+#!/usr/bin/awk -f
+BEGIN{
+        chromosome = 1
+        begining = 2
+        end = 5
+        variant = 7
+        quality = 9
+}
+$0 !~ /^#/ && 				# Filter comments
+$chromosome ~ /^([0-9]+|X|Y|MT)$/ && 	# Output valid chromosomes
+$variant ~ /^(DEL|INS|INV)$/ && 	# Variants for VEP
+$quality > 90 \
+{print $chromosome, $begining, $end, $variant}
